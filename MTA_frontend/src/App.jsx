@@ -12,24 +12,25 @@ export default function App() {
     setLoading(true);
     setResult(null);
 
-    try {
-      const res = await fetch("http://127.0.0.1:8000/sessions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, notes }),
-      });
+  try {
+    const API_URL = import.meta.env.VITE_API_URL;
 
-      if (!res.ok) throw new Error("Backend error: " + res.status);
+    const res = await fetch(`${API_URL}/sessions`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, notes }),
+    });
 
-      const data = await res.json();
-      setResult(data);
-    } catch (e) {
-      setError(e.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+    if (!res.ok) throw new Error("Backend error: " + res.status);
 
+    const data = await res.json();
+    setResult(data);
+  } catch (e) {
+    setError(e.message);
+  } finally {
+    setLoading(false);
+  }
+};
   const kpis = result
     ? [
         { label: "Action Items", value: result.action_items?.length || 0 },
