@@ -43,7 +43,11 @@ def health():
 def generate_with_llm(notes: str):
 
     prompt = f"""
-You are an enterprise meeting minutes extractor.
+You are an enterprise meeting minutes extractor. 
+If summary is one paragraph, split it into bullet-style sentences.
+Each element in summary MUST be a separate array item.
+Each element in decisions MUST be a separate array item.
+
 
 STRICT RULES:
 - Return ONLY raw valid JSON.
@@ -98,26 +102,23 @@ def validate_structure(data: dict):
     data.setdefault("decisions", [])
     data.setdefault("action_items", [])
 
-    # Fix summary (ensure strings)
+    # FORCE summary to be array
+    if isinstance(data["summary"], str):
+        data["summary"] = [data["summary"]]
+
+    # FORCE decisions to be array
+    if isinstance(data["decisions"], str):
+        data["decisions"] = [data["decisions"]]
+
+    # Ensure summary items are strings
     data["summary"] = [
-        s if isinstance(s, str) else str(s)
-        for s in data["summary"]
+        str(s) for s in data["summary"]
     ]
 
-    # Fix decisions (convert objects to strings if needed)
-    cleaned_decisions = []
-    for d in data["decisions"]:
-        if isinstance(d, str):
-            cleaned_decisions.append(d)
-        elif isinstance(d, dict):
-            # extract value if object
-            cleaned_decisions.append(
-                d.get("decision") or d.get("text") or str(d)
-            )
-        else:
-            cleaned_decisions.append(str(d))
-
-    data["decisions"] = cleaned_decisions
+    # Ensure decisions items are strings
+    data["decisions"] = [
+        str(d) for d in data["decisions"]
+    ]
 
     # Normalize action items
     normalized_items = []
@@ -132,6 +133,7 @@ def validate_structure(data: dict):
     data["action_items"] = normalized_items
 
     return data
+
 
 @app.post("/sessions")
 def create_session(payload: SessionCreate):
