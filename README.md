@@ -47,7 +47,9 @@ cd MTA_frontend
 npm install
 npm run dev
 
-example meeting notes to test: Maria: “Alright team, thanks for joining. The main purpose today is to realign on the revised launch target. We’re now aiming for July 15 for the MVP release. I want to make sure that’s realistic before we lock it in.”
+Example meeting notes to test: 
+
+Maria: “Alright team, thanks for joining. The main purpose today is to realign on the revised launch target. We’re now aiming for July 15 for the MVP release. I want to make sure that’s realistic before we lock it in.”
 
 Kevin: “From engineering’s side, that’s achievable if we freeze the feature scope by next week. I’ll prepare a technical roadmap and share it by March 5 so everyone can see the development phases clearly.”
 
