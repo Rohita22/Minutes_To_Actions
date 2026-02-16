@@ -1,4 +1,4 @@
-Minutes to Actions is an AI powered wed application that turns meeting minutes/transcript into 
+Minutes to Actions is an AI powered web application that turns meeting minutes/transcript into 
 1. consise summary
 2. Key decisions taken
 3. Action items which inclues who is incharge of what task by when.
