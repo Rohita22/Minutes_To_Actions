@@ -2,8 +2,10 @@ Minutes to Actions is an AI powered web application that turns meeting minutes/t
 1. consise summary
 2. Key decisions taken
 3. Action items which inclues who is incharge of what task by when.
+
 Built as a full-stack production-ready system using React + FastAPI + Groq LLM
-Can test the app @: http://fk8go8scgs0w08ccw8gc8s4g.140.245.227.129.sslip.io/
+
+🔗 Live Demo: http://fk8go8scgs0w08ccw8gc8s4g.140.245.227.129.sslip.io/
 
 Features:
 Paste raw meeting notes
